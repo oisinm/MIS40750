@@ -48,7 +48,8 @@ for item in c:
 # Returns list containing distance from required site to each of the others
 def distance_between_sites(plant_num, L):
     plant_num_data = Location[plant_num]
-    print plant_num_data
+    #print "this is tuple of data for locations"
+    #print plant_num_data
     Distance_List = []
     for data in L:
         if data == plant_num_data: # ensure distance is 0 between one site and itself
@@ -56,18 +57,19 @@ def distance_between_sites(plant_num, L):
         else:
             d = lat_long_distance(data[0], data[1], plant_num_data[0], plant_num_data[1])
         Distance_List.append(d)
-    print Distance_List
+    #print "this is the list of distances between sites"
+    #print Distance_List
     return Distance_List
 
 
 # Calculate the distance between site i and all other locations
 for i in range(len(Location)):
-    print i
+    #print i
     distance_between_sites(i, Location)
 
 # Calculate the distance between site i and all ports
 for i in range(len(Location)):
-    print i
+    #print i
     distance_between_sites(i, Ports)
     
 
@@ -77,22 +79,47 @@ for i in range(len(Location)):
 # And the list that contains the sites that cost is being calculated to
 # Returns list containing distance from required site to each of the others
 def transport_cost(D, L):
+    Cost_List = []
     for i in range(len(Location)):
-        print i
+        #print i
         proposed_plant_data = L[i]
         proposed_plant_tonnage = proposed_plant_data[2]
-        print proposed_plant_tonnage
+        #print "this is tonnage at site we are calculating cost to"
+        #print proposed_plant_tonnage
         cost = proposed_plant_tonnage * D[i]
-        print cost
-    #cost = test1[i] * proposed_plant_tonnage
-    #print cost
-        
+        #print "this is cost of transport"
+        #print cost
+        Cost_List.append(cost)
+    #print "this is the list of transport costs to all other sites"
+    #print Cost_List
+    return Cost_List
+ 
+for i in range(len(Location)):
+    #print i
+    transport_cost(distance_between_sites(i,Location), Location)
+
+# Function to sum values in a list
+# Takes in list (in this program list contains transport cost to other sites)
+# Returns the sum
+def sum_costs(L):
+    sum = 0.0
+    for i in L:
+        sum += i
+    #print "this is the sum of transport costs"
+    #print sum
+    return sum
 
 
 for i in range(len(Location)):
-    print i
-    transport_cost(distance_between_sites(i,Location), Location)
-        
+    #print i
+    x = distance_between_sites(i, Location)
+    y = transport_cost(x, Location)
+    z = sum_costs(y)
+    print z
+    
 
+
+#print "This is the Location information as it was originally imported"     
+#print Location
 
   
