@@ -121,6 +121,17 @@ def sum_costs(L):
     #print "this is the sum of transport costs"
     #print sum
     return sum
+    
+# Function to calculate total tonnage that will be transported to the ports
+# Takes in Location list
+# Returns the sum of the tonnage at every site
+def total_tonnage(L):
+    sum = 0.0
+    for data in L:
+        sum += data[2]
+    #print "this is total tonnage"
+    #print sum
+    return sum
 
 Total_Cost_List = []
 for i in range(len(Location)):
@@ -129,25 +140,42 @@ for i in range(len(Location)):
     y = transport_cost(x, Location)
     z = sum_costs(y)
     Total_Cost_List.append(z)
+print "this is the cost from sites to plant"
 print Total_Cost_List
 
+Cost_To_Port = [i * total_tonnage(Location) for i in nearest_port()]
+print "this is the cost from plant to port"
+print Cost_To_Port
+Total_Cost_Port_And_Sites = [a + b for a, b in zip(Total_Cost_List, Cost_To_Port)]
+print "this is the total cost"
+print Total_Cost_Port_And_Sites
 
-# Function to calculate total tonnage that will be transported to the ports
-# Takes in Location list
-# Returns the sum of the tonnage at every site
-def total_tonnage(L):
-    sum = 0.0
-    for data in L:
-        sum += data[2]
-    print sum
-    return sum
+answer = min(Total_Cost_Port_And_Sites)
+print "this is the answer"
+print answer
 
-total_tonnage(Location)
-        
- 
+#index = Total_Cost_Port_And_Sites.index(min(Total_Cost_Port_And_Sites))
+index = Total_Cost_Port_And_Sites.index(answer)
+print index
+print "Details of the chosen site are:"
+print Location[index]
+print "Details of the chosen port are:"
+nearest_port = nearest_port()
+print nearest_port
+
+def index_of_nearest_port(i):
+    L = []
+    L = distance_between_sites(i, Ports)
+    index = L.index(min(L))
+    return index
+
+port_index = index_of_nearest_port(index)
+print Ports[port_index]
+
+#total_tonnage(Location)
+
 #print "This is the Location information as it was originally imported"     
-print Location
-print Ports
-
-print(nearest_port())
+#print Location
+#print Ports
+#print(nearest_port())
   
