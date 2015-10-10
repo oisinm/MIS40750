@@ -68,13 +68,25 @@ for i in range(len(Location)):
     distance_between_sites(i, Location)
 
 # Calculate the distance between site i and all ports
-for i in range(len(Location)):
-    #print i
-    distance_between_sites(i, Ports)
-    
 
+# Function to determine nearest port to each site
+# Returns list with distance to nearest port for each site
+def nearest_port():
+    L = []
+    for i in range(len(Location)):
+        L1 = distance_between_sites(i, Ports)
+        m = min(L1)
+        L.append(m)
+    return L
     
-# Function to calculate transort cost from one site to others
+    
+    
+for i in range(len(Location)):
+#   print i
+    distance_between_sites(i, Ports)
+
+      
+# Function to calculate transport cost from one site to others
 # Takes in distance list for site that cost is being evaluated for
 # And the list that contains the sites that cost is being calculated to
 # Returns list containing distance from required site to each of the others
@@ -97,6 +109,7 @@ def transport_cost(D, L):
 for i in range(len(Location)):
     #print i
     transport_cost(distance_between_sites(i,Location), Location)
+    
 
 # Function to sum values in a list
 # Takes in list (in this program list contains transport cost to other sites)
@@ -109,17 +122,32 @@ def sum_costs(L):
     #print sum
     return sum
 
-
+Total_Cost_List = []
 for i in range(len(Location)):
     #print i
     x = distance_between_sites(i, Location)
     y = transport_cost(x, Location)
     z = sum_costs(y)
-    print z
-    
+    Total_Cost_List.append(z)
+print Total_Cost_List
 
 
+# Function to calculate total tonnage that will be transported to the ports
+# Takes in Location list
+# Returns the sum of the tonnage at every site
+def total_tonnage(L):
+    sum = 0.0
+    for data in L:
+        sum += data[2]
+    print sum
+    return sum
+
+total_tonnage(Location)
+        
+ 
 #print "This is the Location information as it was originally imported"     
-#print Location
+print Location
+print Ports
 
+print(nearest_port())
   
