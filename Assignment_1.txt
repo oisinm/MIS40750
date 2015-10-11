@@ -1,0 +1,49 @@
+MIS40750: Python Programming, Databases, and Version Control Assignment
+Oisin Mangan
+Student Number: 15201541
+
+Goal:
+The goal of this assignment was to select a location for a processing plant and a port the product will be shipped from in order to minimise the total road transportation costs.
+There were 10 locations and 3 ports to choose from. Each of the locations produces a certain amount of raw materials per year. 
+The input data contained the coordinates of each location and port and in the case of the locations the tonnage of raw materials produced at that location per year.
+
+Assumptions:
+Measure of cost of road transportation was calculated as follows:
+Tonnage * Distance (per year)
+Raw material from each location was assumed to be transported directly to processing plant.
+Product was assumed to have same weight as raw materials.
+Earth was assumed to be spherical (for calculating distance between two locations in long lat format).
+
+Method:
+I solved this problem using python programing. 
+In order to solve this I looked at every possibility and chose the lowest road transportation cost from these alternatives.
+In terms of the port selection it is not true to say that I calculated every possibility actually. 
+I looked at the transportation costs for each location from all other locations and then looked at the transportation cost to the nearest port to each location. 
+There was no need to look at the other two (more distant) ports in this case.
+
+An overview of the steps involved were as follows:
+1.	Read data from database into lists in Python.
+2.	Calculate distance from each site to all others.
+3.	Calculate transportation cost from each site to all others based on tonnage and distance.
+4.	Find sum of transportation costs for each site to all others.
+5.	Calculate total tonnage to be transported from location to port.
+6.	Find transportation cost from each location to its nearest port. 
+7.	Get total transportation cost for each location by summing the costs of transportation to nearest port and transportation to all other locations.
+8.	Find the lowest cost of transportation from the result above.
+9.	Generate output (print) of result.
+
+Solution:
+Solution code can be found in accompanying file “Assignment_1.py”. My solution output is as follows:
+
+The list below shows the total transportation cost for each location being used as the processing plant:
+(based on nearest port being used in each case)
+
+[374822970.0287564, 466230504.025807, 668298622.1376927, 437677230.97076726, 261618000.66540694, 270234973.219981, 445867199.00847423, 327104405.9073052, 286766449.2769123, 325846792.81804734]
+
+The minimum transportation cost from this list is: 261618000.665 tkm/year (tonne-kilometre/year)
+
+Details of the location chosen for the processing plant (5th in the list of 10) are:
+(long, lat, production) (52.34, 6.48, 298978.0)
+
+Details of the chosen port (3rd in the list of 3) are:
+(long, lat) (52.27, 6.39)
